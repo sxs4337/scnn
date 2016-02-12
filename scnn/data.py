@@ -5,7 +5,7 @@ import cPickle as cp
 
 
 def parse_cora(plot=False):
-    path = "data/cora/"
+    path = "scnn/data/cora/"
 
     id2index = {}
 
