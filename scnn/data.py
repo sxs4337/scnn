@@ -74,7 +74,7 @@ def parse_cora(plot=False):
 
 
 def parse_nci(graph_name='nci1.graph'):
-    path = "data/nci/"
+    path = "scnn/data/nci/"
 
     with open(path+graph_name,'r') as f:
         raw = cp.load(f)
