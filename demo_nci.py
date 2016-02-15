@@ -1,21 +1,19 @@
 import numpy as np
-from scnn import SCNN, data
+from scnn import GraphSCNN, data
 from sklearn.metrics import f1_score
-import pdb
 
-# Parse the cora dataset and return an adjacency matrix, a design matrix, and a 1-hot label matrix
-A, X, Y = data.parse_cora()
+# Parse the nci dataset and return an lists of adjacency matrices, list of design matrices, and a 1-hot label matrix
+A, X, Y = data.parse_nci()
 
-pdb.set_trace()
 # Construct array indices for the training, validation, and test sets
-n_nodes = A.shape[0]
+n_nodes = len(A)
 indices = np.arange(n_nodes)
 train_indices = indices[:n_nodes // 3]
 valid_indices = indices[n_nodes // 3:(2* n_nodes) // 3]
 test_indices  = indices[(2* n_nodes) // 3:]
 
-# Instantiate an SCNN and fit it to cora
-scnn = SCNN()
+# Instantiate an SCNN and fit it to nci
+scnn = GraphSCNN()
 scnn.fit(A, X, Y, train_indices=train_indices, valid_indices=valid_indices)
 
 # Predict labels for the test set 

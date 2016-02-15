@@ -2,7 +2,7 @@ __author__ = 'jatwood'
 
 import numpy as np
 import cPickle as cp
-
+import random
 
 def parse_cora(plot=False):
     path = "scnn/data/cora/"
@@ -73,7 +73,7 @@ def parse_cora(plot=False):
     return adj.astype('float32'), features.astype('float32'), labels.astype('int32')
 
 
-def parse_nci(graph_name='nci1.graph'):
+def parse_nci(graph_name='nci109.graph'): # or nci1.graph
     path = "scnn/data/nci/"
 
     with open(path+graph_name,'r') as f:
@@ -111,6 +111,13 @@ def parse_nci(graph_name='nci1.graph'):
         X = [np.zeros((rx.size, maxval+1), dtype='float32') for rx in rX]
         for i in range(len(X)):
             X[i][np.arange(rX[i].size),rX[i]] = 1
+    
+    # randomly shuffle the data
+    Y = list(Y)
+    data_temp = zip(A,X,Y)
+    random.shuffle(data_temp)
+    A[:], X[:], Y[:] = zip(*data_temp)
+    Y = np.asarray(Y)
 
     return A, X, Y
 

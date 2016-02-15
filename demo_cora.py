@@ -1,12 +1,10 @@
 import numpy as np
 from scnn import SCNN, data
 from sklearn.metrics import f1_score
-import pdb
 
 # Parse the cora dataset and return an adjacency matrix, a design matrix, and a 1-hot label matrix
 A, X, Y = data.parse_cora()
 
-pdb.set_trace()
 # Construct array indices for the training, validation, and test sets
 n_nodes = A.shape[0]
 indices = np.arange(n_nodes)
